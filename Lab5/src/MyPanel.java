@@ -1,14 +1,8 @@
 import java.awt.Color;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.util.Random;
-
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
@@ -26,8 +20,6 @@ public class MyPanel extends JPanel {
 	public int amountOfNearMines = 0;
 	
 	private Random random;
-	
-	private BufferedImage image;
 	
 	public Color[][] cells = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int [][] bombs = new int [TOTAL_COLUMNS][TOTAL_ROWS];
@@ -80,11 +72,6 @@ public class MyPanel extends JPanel {
 		for (int x = 0; x <= TOTAL_COLUMNS; x++) {
 			g.drawLine(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)), y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS)));
 		}
-
-		//Draw an additional cell at the bottom left
-		//g.drawRect(x1 + GRID_X, y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS)), INNER_CELL_SIZE + 1, INNER_CELL_SIZE + 1)
-		
-		int mx,my,gx,gy; 
 		
 		//Paint cell colors and evaluate near bombs near the cell
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
