@@ -111,37 +111,6 @@ public class MyMouseAdapter extends MouseAdapter {
 			myPanel.repaint();
 			break;
 		case 3:		//Right mouse button
-//			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
-//				//Had pressed outside
-//				//Do nothing
-//			} else {
-//				if ((gridX == -1) || (gridY == -1)) {
-//					//Is releasing outside
-//					//Do nothing
-//				} else {
-//						//Released the mouse button on the same cell where it was pressed
-//						if ((myPanel.mouseDownGridX == gridX) && (myPanel.mouseDownGridY == gridY)) {
-//							//On the left column and on the top row... do nothing
-//							if(myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == uncoveredGrid){
-//								//Do nothing
-//							}
-//	 
-//						else {
-//							if(myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == coveredGrid){
-//								myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = flag;
-//								myPanel.repaint();
-//							}
-//							else{
-//								if(myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == flag){
-//									myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = coveredGrid;
-//									myPanel.repaint();
-//								}
-//							}
-//						}
-//						}
-//				}
-//			}
-			//myPanel.repaint();
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
 				//Had pressed outside
 				//Do nothing
