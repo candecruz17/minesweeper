@@ -175,7 +175,7 @@ public class MyPanel extends JPanel{
 		for(int i = x-1; i <= x+1; i++) {
 			for(int j = y-1; j <= y+1; j++) {
 				if(i < TOTAL_COLUMNS && i >= 0 && j < TOTAL_ROWS && j >= 0 ) {
-					if(bombs[i][j] != 1) {
+					if(bombs[i][j] == 1) {
 						amountOfNearMines++;
 					}
 				}
