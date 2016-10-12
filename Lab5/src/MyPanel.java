@@ -7,21 +7,19 @@ import javax.swing.JPanel;
 
 public class MyPanel extends JPanel{
 	private static final long serialVersionUID = 3426940946811133635L;
-	static final int GRID_X = 25;
-	static final int GRID_Y = 25;
+	private static final int GRID_X = 25;
+	private static final int GRID_Y = 25;
 	static final int INNER_CELL_SIZE = 29;
-	public static final int TOTAL_COLUMNS = 9;
-	public static final int TOTAL_ROWS = 9;   //Last row has only one cell
+	private static final int TOTAL_COLUMNS = 9;
+	private static final int TOTAL_ROWS = 9;   //Last row has only one cell
 	private static final int AMOUNT_OF_MINES = 10;
 	public int x = -1;
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
-	//public int amountOfNearMines = 0;
 	public int amountOfNeighbors1;
 	
 	private Random random;
-	MyMouseAdapter myMouse = new MyMouseAdapter();
 	
 	public Color[][] cells = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int [][] bombs = new int [TOTAL_COLUMNS][TOTAL_ROWS];
@@ -161,14 +159,6 @@ public class MyPanel extends JPanel{
 		
 	}
 	
-	public void setNeighors(int amountOfNeighbors){
-		amountOfNeighbors1 = amountOfNeighbors + amountOfNeighbors1;
-	}
-	
-	public int getNeighbors(){
-		return amountOfNeighbors1;
-	}
-	
 	public int setNumbers(int x, int y) {		//Method for counting number of bombs around a tile.
 		int amountOfNearMines = 0;
 		
@@ -183,52 +173,4 @@ public class MyPanel extends JPanel{
 		}
 		return amountOfNearMines;
 	}
-//	public int setNumbers(int x, int y){
-//		int mx, my, gx, gy;
-//		Insets myInsets = getInsets();
-//		for(int i = x - 1; i <= x + 1; i++){
-//			for(int j = y - 1; y <= y + 1; j++){
-//				amountOfNearMines = 0;
-//				
-//				mx = x - 1;
-//				gx = x + 1;
-//				my = y - 1;
-//				gy = y + 1;
-//				
-//				if(mx >= 0 && my >= 0 && bombs[mx][my] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[mx][my] = 2;
-//				}
-//				if(mx >= 0 && bombs[mx][y] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[mx][y] = 2;
-//				}
-//				if(mx >= 0 && gy < TOTAL_ROWS && bombs[mx][gy] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[mx][gy] = 2;
-//				}
-//				if(gy < TOTAL_ROWS && bombs[x][gy] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[x][gy] = 2;
-//				}
-//				if(gx < TOTAL_COLUMNS && gy < TOTAL_ROWS && bombs[gx][gy] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[gx][gy] = 2;
-//				}
-//				if(gx < TOTAL_COLUMNS && bombs[gx][y] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[gx][y] = 2;
-//				}
-//				if(gx < TOTAL_COLUMNS && my >= 0 && bombs[gx][my] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[gx][my] = 2;
-//				}
-//				if(my >= 0 && bombs[x][my] == 1){
-//					this.amountOfNearMines++;
-//					neighbors[x][my] = 2;
-//				}	
-//			}
-//		}
-//		return amountOfNearMines;
-//	}
 }
