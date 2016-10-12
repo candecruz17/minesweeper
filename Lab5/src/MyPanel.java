@@ -17,14 +17,12 @@ public class MyPanel extends JPanel{
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
-	public int amountOfNeighbors1;
 	
 	private Random random;
 	
 	public Color[][] cells = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int [][] bombs = new int [TOTAL_COLUMNS][TOTAL_ROWS];
 	public int [][] neighbors = new int[TOTAL_COLUMNS][TOTAL_ROWS];
-	public int [][] drawNeighbors = new int[TOTAL_COLUMNS][TOTAL_ROWS];
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		
@@ -83,8 +81,36 @@ public class MyPanel extends JPanel{
 					
 					if (cells[x][y].equals(Color.LIGHT_GRAY)) {
 						int nearMines = setNumbers(x, y);
-						if(nearMines != 0){
+						if((nearMines != 0) && (nearMines == 1)){
 							g.setColor(Color.BLUE);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+						if((nearMines != 0) && (nearMines == 2)){
+							g.setColor(Color.RED);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+						if((nearMines != 0) && (nearMines == 3)){
+							g.setColor(Color.GREEN);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+						if((nearMines != 0) && (nearMines == 4)){
+							g.setColor(Color.YELLOW);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+						if((nearMines != 0) && (nearMines == 5)){
+							g.setColor(Color.ORANGE);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+						if((nearMines != 0) && (nearMines == 6)){
+							g.setColor(Color.BLACK);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+						if((nearMines != 0) && (nearMines == 7)){
+							g.setColor(Color.PINK);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+						if((nearMines != 0) && (nearMines == 8)){
+							g.setColor(Color.MAGENTA);
 							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
 						}
 					}
