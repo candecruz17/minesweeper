@@ -45,7 +45,6 @@ public class MyPanel extends JPanel{
 		}
 		
 		plantMines();
-		//coverGrids();
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -148,6 +147,14 @@ public class MyPanel extends JPanel{
 		for(int i = 0; i < AMOUNT_OF_MINES;i++){
 			generateMines();
 		}
+	}
+	
+	public int getRows(){
+		return this.TOTAL_ROWS;
+	}
+	
+	public int getColumns(){
+		return this.TOTAL_COLUMNS;
 	}
 	
 	public void generateMines(){

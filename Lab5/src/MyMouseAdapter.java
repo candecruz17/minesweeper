@@ -105,8 +105,16 @@ public class MyMouseAdapter extends MouseAdapter {
 						}
 						if((myPanel.bombs[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) && 
 								myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != flag){
-							myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = bomb;
-							myPanel.repaint();
+							for (int x5 = 0; x5 < myPanel.getColumns(); x5++){
+								for (int y5 = 0; y5 < myPanel.getRows(); y5++){
+									if(myPanel.bombs[x5][y5] == 1){
+										myPanel.cells[x5][y5] = bomb;
+										myPanel.repaint();
+									}
+								}
+							}
+//							myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = bomb;
+//							myPanel.repaint();
 							JOptionPane.showMessageDialog(null, "Bomb Clicked!", "Minesweeper", JOptionPane.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
