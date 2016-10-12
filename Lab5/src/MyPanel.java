@@ -149,11 +149,11 @@ public class MyPanel extends JPanel{
 		}
 	}
 	
-	public int getRows(){
+	public int getTotalRows(){
 		return this.TOTAL_ROWS;
 	}
 	
-	public int getColumns(){
+	public int getTotalColumns(){
 		return this.TOTAL_COLUMNS;
 	}
 	
