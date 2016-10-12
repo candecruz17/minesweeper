@@ -1,10 +1,17 @@
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
 
 public class MyMouseAdapter extends MouseAdapter {
 	
@@ -71,7 +78,6 @@ public class MyMouseAdapter extends MouseAdapter {
 
 		int gridX = myPanel.getGridX(x, y);
 		int gridY = myPanel.getGridY(x, y);
-		
 		
 		switch (e.getButton()){
 		case 1:		//Left mouse button

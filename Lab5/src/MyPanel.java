@@ -1,29 +1,32 @@
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class MyPanel extends JPanel {
+public class MyPanel extends JPanel{
 	private static final long serialVersionUID = 3426940946811133635L;
-	private static final int GRID_X = 25;
-	private static final int GRID_Y = 25;
-	private static final int INNER_CELL_SIZE = 29;
-	private static final int TOTAL_COLUMNS = 9;
-	private static final int TOTAL_ROWS = 9;   //Last row has only one cell
+	static final int GRID_X = 25;
+	static final int GRID_Y = 25;
+	static final int INNER_CELL_SIZE = 29;
+	public static final int TOTAL_COLUMNS = 9;
+	public static final int TOTAL_ROWS = 9;   //Last row has only one cell
 	private static final int AMOUNT_OF_MINES = 10;
 	public int x = -1;
 	public int y = -1;
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
-	public int amountOfNearMines = 0;
+	//public int amountOfNearMines = 0;
+	public int amountOfNeighbors1;
 	
 	private Random random;
+	MyMouseAdapter myMouse = new MyMouseAdapter();
 	
 	public Color[][] cells = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int [][] bombs = new int [TOTAL_COLUMNS][TOTAL_ROWS];
 	public int [][] neighbors = new int[TOTAL_COLUMNS][TOTAL_ROWS];
+	public int [][] drawNeighbors = new int[TOTAL_COLUMNS][TOTAL_ROWS];
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		
@@ -60,7 +63,7 @@ public class MyPanel extends JPanel {
 		int height = y2 - y1;
 
 		//Paint the background
-		g.setColor(Color.LIGHT_GRAY);
+		g.setColor(Color.ORANGE);
 		g.fillRect(x1, y1, width + 1, height + 1);
 
 		//Draw the grid minus the bottom row (which has only one cell)
@@ -81,6 +84,13 @@ public class MyPanel extends JPanel {
 					g.setColor(c);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 					
+					if (cells[x][y].equals(Color.LIGHT_GRAY)) {
+						int nearMines = setNumbers(x, y);
+						if(nearMines != 0){
+							g.setColor(Color.BLUE);
+							g.drawString(nearMines + "" + "", x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 21);
+						}
+					}
 				}
 			}
 		}
@@ -151,59 +161,74 @@ public class MyPanel extends JPanel {
 		
 	}
 	
-	public void setNumbers(Graphics g){
-		int mx, my, gx, gy;
-		Insets myInsets = getInsets();
-		int x1 = myInsets.left;
-		int y1 = myInsets.top;
-		for(int x = 0; x < TOTAL_COLUMNS;x++){
-			for(int y = 0; y < TOTAL_ROWS; y++){
-				amountOfNearMines = 0;
-				
-				mx = x - 1;
-				gx = x + 1;
-				my = y - 1;
-				gy = y + 1;
-				
-				if(mx >= 0 && my >= 0 && bombs[mx][my] == 1){
-					amountOfNearMines++;
-					neighbors[mx][my] = 2;
+	public void setNeighors(int amountOfNeighbors){
+		amountOfNeighbors1 = amountOfNeighbors + amountOfNeighbors1;
+	}
+	
+	public int getNeighbors(){
+		return amountOfNeighbors1;
+	}
+	
+	public int setNumbers(int x, int y) {		//Method for counting number of bombs around a tile.
+		int amountOfNearMines = 0;
+		
+		for(int i = x-1; i <= x+1; i++) {
+			for(int j = y-1; j <= y+1; j++) {
+				if(i < TOTAL_COLUMNS && i >= 0 && j < TOTAL_ROWS && j >= 0 ) {
+					if(bombs[i][j] != 1) {
+						amountOfNearMines++;
+					}
 				}
-				if(mx >= 0 && bombs[mx][y] == 1){
-					amountOfNearMines++;
-					neighbors[mx][y] = 2;
-				}
-				if(mx >= 0 && gy < TOTAL_ROWS && bombs[mx][gy] == 1){
-					amountOfNearMines++;
-					neighbors[mx][gy] = 2;
-				}
-				if(gy < TOTAL_ROWS && bombs[x][gy] == 1){
-					amountOfNearMines++;
-					neighbors[x][gy] = 2;
-				}
-				if(gx < TOTAL_COLUMNS && gy < TOTAL_ROWS && bombs[gx][gy] == 1){
-					amountOfNearMines++;
-					neighbors[gx][gy] = 2;
-				}
-				if(gx < TOTAL_COLUMNS && bombs[gx][y] == 1){
-					amountOfNearMines++;
-					neighbors[gx][y] = 2;
-				}
-				if(gx < TOTAL_COLUMNS && my >= 0 && bombs[gx][my] == 1){
-					amountOfNearMines++;
-					neighbors[gx][my] = 2;
-				}
-				if(my >= 0 && bombs[x][my] == 1){
-					amountOfNearMines++;
-					neighbors[x][my] = 2;
-				}
-				
-				if(amountOfNearMines > 0 && bombs[x][y] != 1){
-					g.setColor(Color.BLUE);
-					g.drawString("" + amountOfNearMines, x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 12, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) +12);
-					
-				}	
 			}
 		}
+		return amountOfNearMines;
 	}
+//	public int setNumbers(int x, int y){
+//		int mx, my, gx, gy;
+//		Insets myInsets = getInsets();
+//		for(int i = x - 1; i <= x + 1; i++){
+//			for(int j = y - 1; y <= y + 1; j++){
+//				amountOfNearMines = 0;
+//				
+//				mx = x - 1;
+//				gx = x + 1;
+//				my = y - 1;
+//				gy = y + 1;
+//				
+//				if(mx >= 0 && my >= 0 && bombs[mx][my] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[mx][my] = 2;
+//				}
+//				if(mx >= 0 && bombs[mx][y] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[mx][y] = 2;
+//				}
+//				if(mx >= 0 && gy < TOTAL_ROWS && bombs[mx][gy] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[mx][gy] = 2;
+//				}
+//				if(gy < TOTAL_ROWS && bombs[x][gy] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[x][gy] = 2;
+//				}
+//				if(gx < TOTAL_COLUMNS && gy < TOTAL_ROWS && bombs[gx][gy] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[gx][gy] = 2;
+//				}
+//				if(gx < TOTAL_COLUMNS && bombs[gx][y] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[gx][y] = 2;
+//				}
+//				if(gx < TOTAL_COLUMNS && my >= 0 && bombs[gx][my] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[gx][my] = 2;
+//				}
+//				if(my >= 0 && bombs[x][my] == 1){
+//					this.amountOfNearMines++;
+//					neighbors[x][my] = 2;
+//				}	
+//			}
+//		}
+//		return amountOfNearMines;
+//	}
 }
