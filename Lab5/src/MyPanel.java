@@ -214,6 +214,19 @@ public class MyPanel extends JPanel {
 		return amountOfNearMines;
 	}
 	
+	public boolean winGame(){
+		int cellCount=0; 
+		for (int i=0; i<TOTAL_COLUMNS; i++){
+			for(int j=0; j<TOTAL_ROWS; j++){
+				if(cells[i][j]==Color.LIGHT_GRAY){
+					cellCount++;
+				} 
+			}
+		}
+		return (cellCount==(TOTAL_COLUMNS*TOTAL_ROWS - AMOUNT_OF_MINES));
+
+	}
+	
 	public int getTotalColumns(){
 		return TOTAL_COLUMNS;
 	}

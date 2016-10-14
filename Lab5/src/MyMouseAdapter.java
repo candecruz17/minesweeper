@@ -96,7 +96,14 @@ public class MyMouseAdapter extends MouseAdapter {
 							myPanel.cascade(myPanel.mouseDownGridX, myPanel.mouseDownGridY);
 							myPanel.repaint();
 							myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = Color.LIGHT_GRAY;
+							if(myPanel.winGame()){
+								//Checks if the user have win the came 
+								JOptionPane.showMessageDialog(null, "YOU WIN!", "Minesweeper", JOptionPane.INFORMATION_MESSAGE);
+								System.exit(0);
+							}
 						}
+						
+						
 						
 						if((myPanel.bombs[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == 1) && 
 								myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] != flag){
@@ -137,6 +144,7 @@ public class MyMouseAdapter extends MouseAdapter {
 							if(myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] == uncoveredGrid){
 								myPanel.cells[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = flag;
 								myPanel.repaint();
+								
 							}
 							else{
 								//si ese grid tiene un flag entonces puedes quitarla
