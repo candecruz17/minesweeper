@@ -199,17 +199,6 @@ public class MyPanel extends JPanel {
 		}
 	}
 	
-	public boolean winMethod(){
-		for (int i = 0; i < getTotalColumns(); i++){
-			for (int j = 0; j < getTotalRows(); j++){
-				if((cells[i][j] == Color.WHITE || cells[i][j] == Color.RED) && bombs[i][j] != 1){
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-	
 	public int setNumbers(int x, int y) {		
 		int amountOfNearMines = 0;
 		for(int i = x-1; i <= x+1; i++) {
